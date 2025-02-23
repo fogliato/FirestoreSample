@@ -58,10 +58,8 @@ namespace FirestoreSampleDAL
             {
                 DocumentReference docRef = _db.Collection("usuarios").Document(userId);
                 DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
-
                 if (snapshot.Exists)
                     return snapshot.ConvertTo<User>();
-
                 return null;
             }
             catch (Exception ex)
