@@ -1,7 +1,5 @@
 ﻿using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Firestore;
-using Google.Cloud.Firestore.V1;
-using Grpc.Auth;
 
 namespace FirestoreSampleDAL
 {
@@ -11,18 +9,11 @@ namespace FirestoreSampleDAL
 
         public FirestoreDAL(string projectId, string databaseId)
         {
-            // Add debug log
             Console.WriteLine($"Starting connection with project: {projectId}");
-
-            // Path for the JSON file with the Firebase credentials. Replace it with your own path.
             string jsonFilePath =
                 @"C:\Projects\PESSOAIS\FirestoreSample\FirestoreSampleConsole\testedofogliato.json";
-            // reading the JSON file
             string credentialsJson = File.ReadAllText(jsonFilePath);
-
-            // Add log to verify if credentials were loaded
             Console.WriteLine("Credentials loaded successfully");
-
             /*
             // get from environment variable
             string credentialsJson =
@@ -37,11 +28,8 @@ namespace FirestoreSampleDAL
             {
                 ProjectId = projectId,
                 DatabaseId = databaseId,
-                // Credenciais podem ser definidas aqui ou via ambiente
                 Credential = credential
             }.Build();
-
-            // Add final log
             Console.WriteLine("Connection established successfully");
         }
 
