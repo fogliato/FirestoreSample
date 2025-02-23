@@ -14,9 +14,14 @@ namespace FirestoreSampleDAL
         public async Task RunMigrationsAsync()
         {
             Console.WriteLine("🚀 Starting migration...");
+            List<User> users = GetUsers();
+            await LoadInFirestoreDataBase(users);
+            Console.WriteLine("✅ Migration Done!");
+        }
 
-            // User list to load
-            var users = new List<User>
+        private static List<User> GetUsers()
+        {
+            return new List<User>
             {
                 new User
                 {
@@ -40,7 +45,10 @@ namespace FirestoreSampleDAL
                     DataCriacao = Timestamp.GetCurrentTimestamp()
                 }
             };
+        }
 
+        private async Task LoadInFirestoreDataBase(List<User> users)
+        {
             foreach (var user in users)
             {
                 if (user.Email == null)
@@ -59,8 +67,6 @@ namespace FirestoreSampleDAL
                     Console.WriteLine($"⚠️ User {user.Nome} exists, skipping...");
                 }
             }
-
-            Console.WriteLine("✅ Migration Done!");
         }
     }
 }
